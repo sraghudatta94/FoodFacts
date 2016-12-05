@@ -17,7 +17,7 @@ var lineReader = readline.createInterface({
 
 lineReader.on('line', function (line) {
 myarray=line.split(new RegExp(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
-if(myarray[33]=="Netherlands"){
+if(myarray[33].includes("Netherlands")){
 	var tempSugar=parseFloat(myarray[102]);
 	var tempSalt=parseFloat(myarray[116]);
 
@@ -36,7 +36,7 @@ else{
   //console.log("Country is "+myarray[33]+" Sugar is "+sugar[0]+" Salt is "+salt[0]);
 
 }
-if(myarray[33]=="Canada"){
+if(myarray[33].includes("Canada")){
 	var tempSugar=parseFloat(myarray[102]);
 	var tempSalt=parseFloat(myarray[116]);
 
@@ -55,7 +55,7 @@ else{
   //console.log("Country is "+myarray[33]+" Sugar is "+sugar[1]+" Salt is "+salt[1]);
 
 }
-if((myarray[33]=="United States")||(myarray[33]=="United Kingdom")){
+if((myarray[33].includes("United States"))||(myarray[33].includes("United Kingdom"))){
 	var tempSugar=parseFloat(myarray[102]);
 	var tempSalt=parseFloat(myarray[116]);
 
@@ -74,7 +74,7 @@ else{
   //console.log("Country is "+myarray[33]+" Sugar is "+sugar[2]+" Salt is "+salt[2]);
 
 }
-if(myarray[33]=="Austrailia"){
+if(myarray[33].includes("Australia")){
 	var tempSugar=parseFloat(myarray[102]);
 	var tempSalt=parseFloat(myarray[116]);
 
@@ -93,7 +93,7 @@ else{
   //console.log("Country is "+myarray[33]+" Sugar is "+sugar[3]+" Salt is "+salt[3]);
 
 }
-if(myarray[33]=="France"){
+if(myarray[33].includes("France")){
 	var tempSugar=parseFloat(myarray[102]);
 	var tempSalt=parseFloat(myarray[116]);
 
@@ -112,7 +112,7 @@ else{
   //console.log("Country is "+myarray[33]+" Sugar is "+sugar[4]+" Salt is "+salt[4]);
 
 }
-if(myarray[33]=="Germany"){
+if(myarray[33].includes("Germany")){
 	var tempSugar=parseFloat(myarray[102]);
 	var tempSalt=parseFloat(myarray[116]);
 
@@ -131,7 +131,7 @@ else{
   //console.log("Country is "+myarray[33]+" Sugar is "+sugar[5]+" Salt is "+salt[5]);
 
 }
-if(myarray[33]=="Spain"){
+if(myarray[33].includes("Spain")){
 	var tempSugar=parseFloat(myarray[102]);
 	var tempSalt=parseFloat(myarray[116]);
 
@@ -150,7 +150,7 @@ else{
   //console.log("Country is "+myarray[33]+" Sugar is "+sugar[6]+" Salt is "+salt[6]);
 
 }
-if(myarray[33]=="South Africa"){
+if(myarray[33].includes("South Africa")){
 	var tempSugar=parseFloat(myarray[102]);
 	var tempSalt=parseFloat(myarray[116]);
 
@@ -169,7 +169,7 @@ else{
   //console.log("Country is "+myarray[33]+" Sugar is "+sugar[7]+" Salt is "+salt[7]);
 
 }
-if((myarray[33]=="United Kingdom")||(myarray[33]=="Denmark")||(myarray[33]=="Sweden")||(myarray[33]=="Norway")){
+if((myarray[33].includes("United Kingdom"))||(myarray[33].includes("Denmark"))||(myarray[33].includes("Sweden"))||(myarray[33].includes("Norway"))){
 
 	var tempFat=parseFloat(myarray[65]);
 	var tempProtein=parseFloat(myarray[112]);
@@ -193,7 +193,7 @@ if((myarray[33]=="United Kingdom")||(myarray[33]=="Denmark")||(myarray[33]=="Swe
 		carbohydrate[0]=carbohydrate[0]+tempCarbohydrate;
 	}
 }
-if((myarray[33]=="France")||(myarray[33]=="Belgium")||(myarray[33]=="Germany")||(myarray[33]=="Switzerland")||(myarray[33]=="Netherlands")){
+if((myarray[33].includes("France"))||(myarray[33].includes("Belgium"))||(myarray[33].includes("Germany"))||(myarray[33].includes("Switzerland"))||(myarray[33].includes("Netherlands"))){
 
 	var tempFat=parseFloat(myarray[65]);
 	var tempProtein=parseFloat(myarray[112]);
@@ -216,8 +216,10 @@ if((myarray[33]=="France")||(myarray[33]=="Belgium")||(myarray[33]=="Germany")||
 	else{
 		carbohydrate[1]=carbohydrate[1]+tempCarbohydrate;
 	}
+
 }
-if((myarray[33]=="Portugal")||(myarray[33]=="Greece")||(myarray[33]=="Italy")||(myarray[33]=="Spain")||(myarray[33]=="Croatia")||(myarray[33]=="Albania")){
+if((myarray[33].includes("Portugal"))||(myarray[33].includes("Greece"))||(myarray[33].includes("Italy"))||(myarray[33].includes("Spain"))||(myarray[33].includes("Croatia"))||(myarray[33].includes("Albania")))
+{
 
 	var tempFat=parseFloat(myarray[65]);
 	var tempProtein=parseFloat(myarray[112]);
@@ -240,6 +242,7 @@ if((myarray[33]=="Portugal")||(myarray[33]=="Greece")||(myarray[33]=="Italy")||(
 	else{
 		carbohydrate[2]=carbohydrate[2]+tempCarbohydrate;
 	}
+	console.log(fat[2]+protein[2]+carbohydrate[2]);
 }
   //console.log(myarray[33]);
 });
@@ -279,7 +282,7 @@ fs.writeFile('json1.json',JSON.stringify(fooddetailsJSON1), function (err) {
 }
 function createMyJsonObj2(){
 var myJsonobj2;//=JSON.parse(fooddetailsJSON1);
-fs.writeFile('json2.json',JSON.stringify(regiondetailsJSON), function (err) {
+fs.writeFile('data.json',JSON.stringify(regiondetailsJSON), function (err) {
         if (err) throw err;
         console.log('Json 2 file created.........');
     });
