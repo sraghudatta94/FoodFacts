@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style>
+  <style>
 
 .bar {
   fill: steelblue;
@@ -11,9 +11,9 @@
 }
 
 </style>
-<svg width="960" height="500"></svg>
-<script src="d3.min.js"></script>
-<script>
+  <svg width="960" height="500"></svg>
+<script src="js/d3.min.js"></script>
+  <script>
 
 var svg = d3.select("svg"),
     margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -36,12 +36,12 @@ var stack = d3.stack();
 
 d3.json("js/data.json", function(error, data) {
   if (error) throw error;
-  console.log(data);
+  //console.log(data);
   var columns;
-  columns= Object.keys(data[0]);
+  columns= Object.keys(data[0]);//Stores Region,fat,protein,carbohydrate
   data.forEach(function(n){
       n["total"] = n.fat+n.protein+n.carbohydrate;
-      console.log(n.total);
+      //console.log(n.total);
   });
   console.log(columns);
   data["columns"] = columns;
@@ -107,5 +107,7 @@ function arrange(data){
 
 </script>
 <body>
-  <a href="index2.html">index2</a>
+          <a href="index.html">Stacked Bar Chart Region Wise</a>
+    <a href="index2.html">Stacked Bar Chart Country Wise</a>
+        <a href="multiSeriesLine.html">multi line series Region Wise</a>
 </body>

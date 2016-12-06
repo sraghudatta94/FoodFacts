@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body { font: 12px Arial;}
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+var    margin = {top: 60, right: 40, bottom: 30, left: 100},
+    width = 800 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+///var    parseDate = d3.time.format("%d-%b-%y").parse;
+
+//var    x = d3.time.scale().range([0, width]);
+var x=d3.scale.ordinal().rangeRoundBands([0,500],1,1);
+var    y = d3.scale.linear().range([height, 0]);
+
+var    xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(3);
+
+var    yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(15);
+
+var    valueline = d3.svg.line()
+    .x(function(d) { return x(d.region); })
+    .y(function(d) { return y(d.fat); });
+
+var    valueline2 = d3.svg.line()
+    .x(function(d) { return x(d.region); })
+    .y(function(d) { return y(d.protein); });
+
+ var    valueline3 = d3.svg.line()
+     .x(function(d) { return x(d.region); })
+     .y(function(d) { return y(d.carbohydrate); });
+
+var    svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.json("js/data.json", function(error, data) {
+    data.forEach(function(d) {
+        d.region = d.region;
+        d.fat = d.fat;
+        d.protein = d.protein;
+   d.carbohydrate = d.carbohydrate;
+    });
+
+    // Scale the range of the data
+ x.domain(data.map(function(d){
+     return d.region;
+ }));
+    y.domain([0, d3.max(data, function(d) { return Math.max(d.fat, d.protein,d.carbohydrate); })]);
+
+    svg.append("path")        // Add the valueline path.
+        .attr("class", "line")
+   .style("stroke", "blue")
+        .attr("d", valueline(data));
+
+    svg.append("path")        // Add the valueline2 path.
+        .attr("class", "line")
+        .style("stroke", "red")
+        .attr("d", valueline2(data));
+   svg.append("path")        // Add the valueline3 path.
+     .attr("class", "line")
+     .style("stroke", "green")
+     .attr("d", valueline3(data));
+
+    svg.append("g")            // Add the X Axis
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    svg.append("g")            // Add the Y Axis
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    svg.append("text")
+        .attr("transform", "translate(" + (width-40) + "," + y(data[0].fat) + ")")
+        .attr("dy", "-29em")
+        .attr("text-anchor", "start")
+        .style("fill", "blue")
+        .text("Fat");
+
+    svg.append("text")
+        .attr("transform", "translate(" + (width-40) + "," + y(data[0].protein) + ")")
+        .attr("dy", "-28em")
+        .attr("text-anchor", "start")
+        .style("fill", "red")
+        .text("protein");
+
+   svg.append("text")
+         .attr("transform", "translate(" + (width-40) + "," + y(data[0].carbohydrate) + ")")
+         .attr("dy", "-25em")
+         .attr("text-anchor", "start")
+         .style("fill", "green")
+         .text("Carbohydrate");
+
+//console.log(data.length-1);
+//console.log(data[data.length-1].open);
+//console.log(data[0].open);
+//console.log(y(data[0].open));
+//console.log(y(data[0].close));
+
+});
+
+</script>
+
+        <a href="index.html">Stacked Bar Chart Region Wise</a>
+    <a href="index2.html">Stacked Bar Chart Country Wise</a>
+        <a href="multiSeriesLine.html">multi line series Region Wise</a>
+</body>
+
+</html>
